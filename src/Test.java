@@ -2,27 +2,27 @@ import Linear.MyArrayList;
 
 public class Test {
     public static void main(String[] args) {
-        // Teste do construtor com capacidade específica
-        MyArrayList<String> lista1 = new MyArrayList<>(5);
-        System.out.println("Lista1: " + lista1);
+        // Test: Construtor with specific capacity
+        MyArrayList<String> list1 = new MyArrayList<>(5);
+        System.out.println("List 1: " + list1);
         
-        // Teste do construtor padrão
-        MyArrayList<Integer> lista2 = new MyArrayList<>();
-        System.out.println("Lista2: " + lista2);
-        
-        // Teste com capacidade 0 (válido)
-        MyArrayList<Double> lista3 = new MyArrayList<>(0);
-        System.out.println("Lista3: " + lista3);
-        
-        // Teste de verificação de estado
-        System.out.println("Lista1 está vazia? " + lista1.isEmpty());
-        System.out.println("Capacidade da lista1: " + lista1.getCapacity());
-        System.out.println("Tamanho atual da lista1: " + lista1.size());
-        System.out.println("Capacidade da lista2: " + lista2.getCapacity());
-        System.out.println("Tamanho atual da lista2: " + lista2.size());
-        
-        // Este teste causará exceção (descomente para testar)
+        // Test: Construtor with default capacity
+        MyArrayList<Integer> list2 = new MyArrayList<>();
+        System.out.println("List 2: " + list2);
+
+        // Test: Construtor with zero capacity (valid)
+        MyArrayList<Double> list3 = new MyArrayList<>(0);
+        System.out.println("List 3: " + list3);
+
+        // Tests
+        System.out.println("Is List 1 empty? " + list1.isEmpty());
+        System.out.println("List 1 Capacity: " + list1.getCapacity());
+        System.out.println("Current List Size 1: " + list1.size());
+        System.out.println("List 2 Capacity: " + list2.getCapacity());
+        System.out.println("Current List Size 2: " + list2.size());
+
+        // Exception Test: (uncomment to test)
         // Exception in thread "main" java.lang.IllegalArgumentException: Capacity can not be negative: -1
-        // MyArrayList<String> listaInvalida = new MyArrayList<>(-1);
+        // MyArrayList<String> invalidList = new MyArrayList<>(-1);
     }
 }
