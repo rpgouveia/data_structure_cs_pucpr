@@ -26,7 +26,7 @@ public class Test {
         list.add("Python");
         System.out.println("Add Python: " + list.toDetailedString());
         
-        list.add("JavaScript"); // This will trigger growth
+        list.add("JavaScript");
         System.out.println("Add JS (growth): " + list.toDetailedString());
         
         list.add("C++");
