@@ -17,9 +17,9 @@ public class Test {
         // Basic tests
         System.out.println("Is List 1 empty? " + list1.isEmpty());
         System.out.println("List 1 Capacity: " + list1.getCapacity());
-        System.out.println("Current List Size 1: " + list1.size());
+        System.out.println("Current List Size 1: " + list1.getSize());
         System.out.println("List 2 Capacity: " + list2.getCapacity());
-        System.out.println("Current List Size 2: " + list2.size());
+        System.out.println("Current List Size 2: " + list2.getSize());
 
         // Exception Test: (uncomment to test)
         // Exception in thread "main" java.lang.IllegalArgumentException: Capacity can not be negative: -1
@@ -31,7 +31,7 @@ public class Test {
         System.out.println("Initial list: " + list);
         System.out.println("Is empty? " + list.isEmpty());
         System.out.println("Is full? " + list.isFull());
-        System.out.println("Size: " + list.size());
+        System.out.println("Size: " + list.getSize());
         System.out.println();
         
         // Add first element

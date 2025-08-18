@@ -29,7 +29,7 @@ public class MyArrayList<T> {
         return capacity;
     }
 
-    public int size() {
+    public int getSize() {
         return size;
     }
 
