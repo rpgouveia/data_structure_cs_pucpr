@@ -1,7 +1,7 @@
 package Linear;
 
-// Create generic (https://www.w3schools.com/java/java_generics.asp)
 // ArrayList (https://www.w3schools.com/java/java_arraylist.asp)
+// Create generic (https://www.w3schools.com/java/java_generics.asp)
 
 // Implementation
 public class MyArrayList<T> {
@@ -77,18 +77,18 @@ public class MyArrayList<T> {
             return "[]";
         }
         
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[");
         
         for (int i = 0; i < size; i++) {
-            sb.append(data[i]);
+            stringBuilder.append(data[i]);
             if (i < size - 1) {
-                sb.append(", ");
+                stringBuilder.append(", ");
             }
         }
         
-        sb.append("]");
-        return sb.toString();
+        stringBuilder.append("]");
+        return stringBuilder.toString();
     }
 
     // method to show detailed information
@@ -124,6 +124,22 @@ public class MyArrayList<T> {
         }
         data[index] = element;
         size++;
+    }
+
+    // method to remove elements at a specific index
+    public T remove(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index out of bounds: " + index + ". Valid range: 0 to " + (size - 1) + ".");
+        }
+        // Store the element to be removed
+        T removedElement = data[index];
+        // Shift elements to the left
+        for (int i = index; i < size - 1; i++) {
+            data[i] = data[i + 1];
+        }
+        data[size - 1] = null; // Clear the last element
+        size--;
+        return removedElement;
     }
 
     // method to get the current size of the list

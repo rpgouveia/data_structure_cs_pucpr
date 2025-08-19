@@ -102,5 +102,64 @@ public class Test {
         }
         
         System.out.println("\nFinal state: " + indexList.toDetailedString());
+        
+        // Test remove(index)
+        System.out.println("\n=== Testing remove(index) ===");
+        
+        MyArrayList<String> removeList = new MyArrayList<>(5);
+        
+        // Add some elements first
+        removeList.add("A");
+        removeList.add("B");
+        removeList.add("C");
+        removeList.add("D");
+        removeList.add("E");
+        System.out.println("Initial list: " + removeList.toDetailedString());
+        
+        // Remove from middle
+        String removed1 = removeList.remove(2);
+        System.out.println("Removed '" + removed1 + "' from index 2: " + removeList.toDetailedString());
+        
+        // Remove from beginning
+        String removed2 = removeList.remove(0);
+        System.out.println("Removed '" + removed2 + "' from index 0: " + removeList.toDetailedString());
+        
+        // Remove from end
+        String removed3 = removeList.remove(removeList.size() - 1);
+        System.out.println("Removed '" + removed3 + "' from end: " + removeList.toDetailedString());
+        
+        // Remove until empty
+        String removed4 = removeList.remove(0);
+        String removed5 = removeList.remove(0);
+        System.out.println("Removed '" + removed4 + "' and '" + removed5 + "': " + removeList.toDetailedString());
+        
+        System.out.println("\n=== Remove Error Cases ===");
+        
+        // Test remove from empty list
+        try {
+            removeList.remove(0);
+        } catch (IndexOutOfBoundsException error) {
+            System.out.println("Caught expected error removing from empty list: " + error.getMessage());
+        }
+        
+        // Add one element and test invalid indices
+        removeList.add("ONLY");
+        System.out.println("List with one element: " + removeList.toDetailedString());
+        
+        try {
+            removeList.remove(-1);
+        } catch (IndexOutOfBoundsException error) {
+            System.out.println("Caught expected error for index -1: " + error.getMessage());
+        }
+        
+        try {
+            removeList.remove(1);
+        } catch (IndexOutOfBoundsException error) {
+            System.out.println("Caught expected error for index 1: " + error.getMessage());
+        }
+        
+        // Remove the last element
+        String lastRemoved = removeList.remove(0);
+        System.out.println("Removed last element '" + lastRemoved + "': " + removeList.toDetailedString());
     }
 }
