@@ -27,7 +27,7 @@ public class Test {
         System.out.println("Add Python: " + list.toDetailedString());
         
         list.add("JavaScript");
-        System.out.println("Add JS (growth): " + list.toDetailedString());
+        System.out.println("Add JS: " + list.toDetailedString());
         
         list.add("C++");
         list.add("Go");

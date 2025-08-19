@@ -1,15 +1,16 @@
 package Linear;
 
 // Create generic (https://www.w3schools.com/java/java_generics.asp)
+// ArrayList (https://www.w3schools.com/java/java_arraylist.asp)
 
 // Implementation
 public class MyArrayList<T> {
-    // attributes
+    /* attributes */
     private T[] data;       // array to store elements
     private int capacity;   // maximum number of elements
     private int size;       // current number of elements
 
-    // constructors
+    /* constructors */
     @SuppressWarnings("unchecked") // Type safety: Unchecked cast from Object[] to T[]
     public MyArrayList(int capacity) {
         if (capacity < 0) {
@@ -24,13 +25,9 @@ public class MyArrayList<T> {
         this(10); // default capacity
     }
 
-    // helper methods
+    /* helper methods */
     public int getCapacity() {
         return capacity;
-    }
-
-    public int getSize() {
-        return size;
     }
 
     public boolean isEmpty() {
@@ -64,7 +61,8 @@ public class MyArrayList<T> {
         capacity = newCapacity;
     }
 
-    // method to debug MyArrayList construction
+    /* methods for debugging */
+    // method to check MyArrayList construction
     @Override
     public String toString() {
         return String.format(
@@ -102,13 +100,19 @@ public class MyArrayList<T> {
     }
 
 
-    // main methods
+    /* main methods */
+    // method to add elements at the end of the list
     public void add(T element) {
         if (size >= capacity) {
             increaseCapacity();
         }
         data[size] = element;
         size++;
+    }
+
+    // method to get the current size of the list
+    public int size() {
+        return size;
     }
 
 }
