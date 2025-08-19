@@ -540,5 +540,145 @@ public class Test {
         // indexOf again to see the remaining B moved to different index
         int newIndex = compareList.indexOf("B");
         System.out.println("indexOf('B') after removal: " + newIndex);
+        
+        // Test contains(Object)
+        System.out.println("\n=== Testing contains(Object) ===");
+        
+        MyArrayList<String> containsList = new MyArrayList<>(6);
+        
+        // Add some elements
+        containsList.add("Java");
+        containsList.add("Python");
+        containsList.add("JavaScript");
+        containsList.add("C++");
+        containsList.add("Go");
+        System.out.println("Programming languages list: " + containsList.toDetailedString());
+        
+        // Check for existing elements
+        boolean hasJava = containsList.contains("Java");
+        boolean hasPython = containsList.contains("Python");
+        boolean hasJavaScript = containsList.contains("JavaScript");
+        boolean hasGo = containsList.contains("Go");
+        
+        System.out.println("Contains 'Java': " + hasJava);
+        System.out.println("Contains 'Python': " + hasPython);
+        System.out.println("Contains 'JavaScript': " + hasJavaScript);
+        System.out.println("Contains 'Go': " + hasGo);
+        
+        // Check for non-existing elements
+        boolean hasRust = containsList.contains("Rust");
+        boolean hasKotlin = containsList.contains("Kotlin");
+        boolean hasSwift = containsList.contains("Swift");
+        
+        System.out.println("Contains 'Rust': " + hasRust);
+        System.out.println("Contains 'Kotlin': " + hasKotlin);
+        System.out.println("Contains 'Swift': " + hasSwift);
+        
+        System.out.println("\n=== Testing contains with duplicates ===");
+        
+        MyArrayList<String> duplicatesList = new MyArrayList<>(5);
+        duplicatesList.add("Apple");
+        duplicatesList.add("Banana");
+        duplicatesList.add("Apple");
+        duplicatesList.add("Cherry");
+        duplicatesList.add("Apple");
+        System.out.println("List with duplicates: " + duplicatesList.toDetailedString());
+        
+        boolean hasApple = duplicatesList.contains("Apple");
+        boolean hasBanana = duplicatesList.contains("Banana");
+        boolean hasCherry = duplicatesList.contains("Cherry");
+        boolean hasOrange = duplicatesList.contains("Orange");
+        
+        System.out.println("Contains 'Apple' (appears 3 times): " + hasApple);
+        System.out.println("Contains 'Banana' (appears 1 time): " + hasBanana);
+        System.out.println("Contains 'Cherry' (appears 1 time): " + hasCherry);
+        System.out.println("Contains 'Orange' (appears 0 times): " + hasOrange);
+        
+        System.out.println("\n=== Testing contains with null values ===");
+        
+        MyArrayList<String> nullContainsList = new MyArrayList<>(4);
+        nullContainsList.add("First");
+        nullContainsList.add(null);
+        nullContainsList.add("Third");
+        nullContainsList.add(null);
+        System.out.println("List with nulls: " + nullContainsList.toDetailedString());
+        
+        boolean hasFirst = nullContainsList.contains("First");
+        boolean hasNull = nullContainsList.contains(null);
+        boolean hasThird = nullContainsList.contains("Third");
+        boolean hasNonExistent = nullContainsList.contains("NonExistent");
+        
+        System.out.println("Contains 'First': " + hasFirst);
+        System.out.println("Contains null: " + hasNull);
+        System.out.println("Contains 'Third': " + hasThird);
+        System.out.println("Contains 'NonExistent': " + hasNonExistent);
+        
+        System.out.println("\n=== Testing contains with different types ===");
+        
+        MyArrayList<Integer> numberContainsList = new MyArrayList<>(4);
+        numberContainsList.add(10);
+        numberContainsList.add(20);
+        numberContainsList.add(30);
+        numberContainsList.add(20);
+        System.out.println("Number list: " + numberContainsList.toDetailedString());
+        
+        boolean has10 = numberContainsList.contains(10);
+        boolean has20 = numberContainsList.contains(20);
+        boolean has30 = numberContainsList.contains(30);
+        boolean has40 = numberContainsList.contains(40);
+        
+        System.out.println("Contains 10: " + has10);
+        System.out.println("Contains 20 (appears twice): " + has20);
+        System.out.println("Contains 30: " + has30);
+        System.out.println("Contains 40: " + has40);
+        
+        System.out.println("\n=== Testing contains on empty list ===");
+        
+        MyArrayList<String> emptyContainsList = new MyArrayList<>();
+        boolean hasAnythingInEmpty = emptyContainsList.contains("anything");
+        boolean hasNullInEmpty = emptyContainsList.contains(null);
+        
+        System.out.println("Empty list contains 'anything': " + hasAnythingInEmpty);
+        System.out.println("Empty list contains null: " + hasNullInEmpty);
+        
+        System.out.println("\n=== Demonstrating contains vs indexOf ===");
+        
+        MyArrayList<String> compareContainsList = new MyArrayList<>(4);
+        compareContainsList.add("A");
+        compareContainsList.add("B");
+        compareContainsList.add("C");
+        System.out.println("Demo list: " + compareContainsList.toDetailedString());
+        
+        // contains vs indexOf for existing element
+        boolean containsB = compareContainsList.contains("B");
+        int indexOfB = compareContainsList.indexOf("B");
+        System.out.println("contains('B'): " + containsB + " (boolean result)");
+        System.out.println("indexOf('B'): " + indexOfB + " (specific position)");
+        
+        // contains vs indexOf for non-existing element
+        boolean containsX = compareContainsList.contains("X");
+        int indexOfX = compareContainsList.indexOf("X");
+        System.out.println("contains('X'): " + containsX + " (boolean result)");
+        System.out.println("indexOf('X'): " + indexOfX + " (not found indicator)");
+        
+        System.out.println("\n=== Testing contains after modifications ===");
+        
+        MyArrayList<String> modifyList = new MyArrayList<>(3);
+        modifyList.add("Before");
+        modifyList.add("During");
+        modifyList.add("After");
+        System.out.println("Initial list: " + modifyList.toDetailedString());
+        
+        System.out.println("Initially contains 'During': " + modifyList.contains("During"));
+        
+        // Remove element and check again
+        modifyList.remove("During");
+        System.out.println("After removing 'During': " + modifyList.toDetailedString());
+        System.out.println("Now contains 'During': " + modifyList.contains("During"));
+        
+        // Add element back and check
+        modifyList.add("During");
+        System.out.println("After adding 'During' back: " + modifyList.toDetailedString());
+        System.out.println("Contains 'During' again: " + modifyList.contains("During"));
     }
 }

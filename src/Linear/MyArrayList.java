@@ -198,4 +198,9 @@ public class MyArrayList<T> {
         }
         return -1;
     }
+
+    // method to check if the list contains a specific element
+    public boolean contains(Object object) {
+        return indexOf(object) >= 0;
+    }
 }
