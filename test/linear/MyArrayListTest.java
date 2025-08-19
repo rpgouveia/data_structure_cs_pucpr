@@ -1,6 +1,6 @@
-import Linear.MyArrayList;
+package linear;
 
-public class Test {
+public class MyArrayListTest {
     public static void main(String[] args) {
         System.out.println("=== MyArrayList Test ===");
         
