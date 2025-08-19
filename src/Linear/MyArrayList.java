@@ -159,5 +159,14 @@ public class MyArrayList<T> {
         return size;
     }
 
+    // method to set an element at a specific index
+    public T set(int index, T element) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index out of bounds: " + index + ". Valid range: 0 to " + (size - 1) + ".");
+        }
+        T oldValue = data[index];
+        data[index] = element;
+        return oldValue;
+    }
 }
 

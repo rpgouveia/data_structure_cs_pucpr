@@ -226,5 +226,93 @@ public class Test {
         boolean removedFromEmpty = emptyRemoveList.remove("anything");
         System.out.println("Remove from empty list - Success: " + removedFromEmpty);
         System.out.println("Empty list: " + emptyRemoveList.toDetailedString());
+        
+        // Test set(index, element)
+        System.out.println("\n=== Testing set(index, element) ===");
+        
+        MyArrayList<String> setList = new MyArrayList<>(5);
+        
+        // Add some initial elements
+        setList.add("Original1");
+        setList.add("Original2");
+        setList.add("Original3");
+        setList.add("Original4");
+        System.out.println("Initial list: " + setList.toDetailedString());
+        
+        // Set element at beginning
+        String oldValue1 = setList.set(0, "New1");
+        System.out.println("Set index 0 to 'New1', old value: '" + oldValue1 + "'");
+        System.out.println("Result: " + setList.toDetailedString());
+        
+        // Set element in middle
+        String oldValue2 = setList.set(2, "New3");
+        System.out.println("Set index 2 to 'New3', old value: '" + oldValue2 + "'");
+        System.out.println("Result: " + setList.toDetailedString());
+        
+        // Set element at end
+        String oldValue3 = setList.set(setList.size() - 1, "NewLast");
+        System.out.println("Set last index to 'NewLast', old value: '" + oldValue3 + "'");
+        System.out.println("Result: " + setList.toDetailedString());
+        
+        // Set same element multiple times
+        String oldValue4 = setList.set(1, "Updated");
+        String oldValue5 = setList.set(1, "UpdatedAgain");
+        System.out.println("Set index 1 twice: '" + oldValue4 + "' -> '" + oldValue5 + "'");
+        System.out.println("Result: " + setList.toDetailedString());
+        
+        System.out.println("\n=== Testing set with different types ===");
+        
+        MyArrayList<Integer> numberList = new MyArrayList<>(3);
+        numberList.add(10);
+        numberList.add(20);
+        numberList.add(30);
+        System.out.println("Number list: " + numberList.toDetailedString());
+        
+        Integer oldNumber = numberList.set(1, 999);
+        System.out.println("Set index 1 to 999, old value: " + oldNumber);
+        System.out.println("Result: " + numberList.toDetailedString());
+        
+        System.out.println("\n=== Testing set with null values ===");
+        
+        MyArrayList<String> nullSetList = new MyArrayList<>(3);
+        nullSetList.add("A");
+        nullSetList.add("B");
+        nullSetList.add("C");
+        System.out.println("Initial: " + nullSetList.toDetailedString());
+        
+        // Set to null
+        String oldValueNull = nullSetList.set(1, null);
+        System.out.println("Set index 1 to null, old value: '" + oldValueNull + "'");
+        System.out.println("Result: " + nullSetList.toDetailedString());
+        
+        // Set null to something else
+        String oldValueFromNull = nullSetList.set(1, "NotNull");
+        System.out.println("Set index 1 from null to 'NotNull', old value: " + oldValueFromNull);
+        System.out.println("Result: " + nullSetList.toDetailedString());
+        
+        System.out.println("\n=== Set Error Cases ===");
+        
+        // Test invalid indices
+        try {
+            setList.set(-1, "INVALID");
+        } catch (IndexOutOfBoundsException error) {
+            System.out.println("Caught expected error for index -1: " + error.getMessage());
+        }
+        
+        try {
+            setList.set(setList.size(), "INVALID");
+        } catch (IndexOutOfBoundsException error) {
+            System.out.println("Caught expected error for index " + setList.size() + ": " + error.getMessage());
+        }
+        
+        // Test set on empty list
+        MyArrayList<String> emptySetList = new MyArrayList<>();
+        try {
+            emptySetList.set(0, "INVALID");
+        } catch (IndexOutOfBoundsException error) {
+            System.out.println("Caught expected error setting on empty list: " + error.getMessage());
+        }
+        
+        System.out.println("\nFinal set list state: " + setList.toDetailedString());
     }
 }
