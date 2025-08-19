@@ -1,7 +1,10 @@
 package Linear;
 
+import java.util.Arrays;
+
 // ArrayList (https://www.w3schools.com/java/java_arraylist.asp)
 // Create generic (https://www.w3schools.com/java/java_generics.asp)
+// toArray() method (https://www.w3schools.com/java/ref_arraylist_toarray.asp)
 
 // Implementation
 public class MyArrayList<T> {
@@ -210,5 +213,33 @@ public class MyArrayList<T> {
             data[i] = null;
         }
         size = 0;
+    }
+
+    // method to convert the list to an array
+    public Object[] toArray() {
+        Object[] result = new Object[size];
+        for (int i = 0; i < size; i++) {
+            result[i] = data[i];
+        }
+        return result;
+    }
+
+    // method to convert the list to a typed array
+    @SuppressWarnings("unchecked")
+    public T[] toArray(T[] array) {
+        if (array.length < size) {
+            // If provided array is too small, create a new one of the same type
+            return (T[]) Arrays.copyOf(data, size, array.getClass());
+        } else {
+            // Copy elements to the provided array
+            for (int i = 0; i < size; i++) {
+                array[i] = data[i];
+            }
+            // Set the element after the last copied element to null
+            if (array.length > size) {
+                array[size] = null;
+            }
+            return array;
+        }
     }
 }

@@ -805,5 +805,195 @@ public class Test {
         System.out.println("Using clear() instead:");
         compareMethodsList.clear();
         System.out.println("After clear(): " + compareMethodsList.toDetailedString());
+        
+        // Test toArray()
+        System.out.println("\n=== Testing toArray() ===");
+        
+        MyArrayList<String> toArrayList = new MyArrayList<>(5);
+        
+        // Add some elements
+        toArrayList.add("First");
+        toArrayList.add("Second");
+        toArrayList.add("Third");
+        toArrayList.add("Fourth");
+        System.out.println("Original list: " + toArrayList.toDetailedString());
+        
+        // Test simple toArray()
+        Object[] objectArray = toArrayList.toArray();
+        System.out.println("toArray() result:");
+        System.out.println("Array length: " + objectArray.length);
+        System.out.print("Array contents: [");
+        for (int i = 0; i < objectArray.length; i++) {
+            System.out.print(objectArray[i]);
+            if (i < objectArray.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+        System.out.println("Array type: " + objectArray.getClass().getSimpleName());
+        
+        // Test typed toArray() with exact size
+        String[] exactArray = toArrayList.toArray(new String[toArrayList.size()]);
+        System.out.println("\ntoArray(String[4]) result:");
+        System.out.println("Array length: " + exactArray.length);
+        System.out.print("Array contents: [");
+        for (int i = 0; i < exactArray.length; i++) {
+            System.out.print("'" + exactArray[i] + "'");
+            if (i < exactArray.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+        System.out.println("Array type: " + exactArray.getClass().getSimpleName());
+        
+        // Test typed toArray() with small array (forces new array creation)
+        String[] smallArray = toArrayList.toArray(new String[2]);
+        System.out.println("\ntoArray(String[2]) - too small, creates new:");
+        System.out.println("Array length: " + smallArray.length);
+        System.out.print("Array contents: [");
+        for (int i = 0; i < smallArray.length; i++) {
+            System.out.print("'" + smallArray[i] + "'");
+            if (i < smallArray.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+        
+        // Test typed toArray() with large array
+        String[] largeArray = toArrayList.toArray(new String[7]);
+        System.out.println("\ntoArray(String[7]) - larger than needed:");
+        System.out.println("Array length: " + largeArray.length);
+        System.out.print("Array contents: [");
+        for (int i = 0; i < largeArray.length; i++) {
+            if (largeArray[i] == null) {
+                System.out.print("null");
+            } else {
+                System.out.print("'" + largeArray[i] + "'");
+            }
+            if (i < largeArray.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+        
+        System.out.println("\n=== Testing toArray() with different types ===");
+        
+        MyArrayList<Integer> numberToArrayList = new MyArrayList<>(4);
+        numberToArrayList.add(10);
+        numberToArrayList.add(20);
+        numberToArrayList.add(30);
+        System.out.println("Number list: " + numberToArrayList.toDetailedString());
+        
+        // Object array version
+        Object[] numberObjectArray = numberToArrayList.toArray();
+        System.out.print("Object array: [");
+        for (int i = 0; i < numberObjectArray.length; i++) {
+            System.out.print(numberObjectArray[i]);
+            if (i < numberObjectArray.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+        
+        // Typed array version
+        Integer[] numberTypedArray = numberToArrayList.toArray(new Integer[3]);
+        System.out.print("Integer array: [");
+        for (int i = 0; i < numberTypedArray.length; i++) {
+            System.out.print(numberTypedArray[i]);
+            if (i < numberTypedArray.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+        
+        System.out.println("\n=== Testing toArray() with null values ===");
+        
+        MyArrayList<String> nullToArrayList = new MyArrayList<>(4);
+        nullToArrayList.add("NotNull");
+        nullToArrayList.add(null);
+        nullToArrayList.add("AlsoNotNull");
+        nullToArrayList.add(null);
+        System.out.println("List with nulls: " + nullToArrayList.toDetailedString());
+        
+        Object[] nullObjectArray = nullToArrayList.toArray();
+        System.out.print("Array with nulls: [");
+        for (int i = 0; i < nullObjectArray.length; i++) {
+            if (nullObjectArray[i] == null) {
+                System.out.print("null");
+            } else {
+                System.out.print("'" + nullObjectArray[i] + "'");
+            }
+            if (i < nullObjectArray.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+        
+        System.out.println("\n=== Testing toArray() on empty list ===");
+        
+        MyArrayList<String> emptyToArrayList = new MyArrayList<>();
+        Object[] emptyObjectArray = emptyToArrayList.toArray();
+        String[] emptyTypedArray = emptyToArrayList.toArray(new String[0]);
+        
+        System.out.println("Empty list toArray() length: " + emptyObjectArray.length);
+        System.out.println("Empty list toArray(String[]) length: " + emptyTypedArray.length);
+        
+        System.out.println("\n=== Testing toArray() with single element ===");
+        
+        MyArrayList<String> singleToArrayList = new MyArrayList<>(1);
+        singleToArrayList.add("OnlyOne");
+        System.out.println("Single element list: " + singleToArrayList.toDetailedString());
+        
+        Object[] singleObjectArray = singleToArrayList.toArray();
+        String[] singleTypedArray = singleToArrayList.toArray(new String[1]);
+        
+        System.out.println("Single element Object[]: ['" + singleObjectArray[0] + "']");
+        System.out.println("Single element String[]: ['" + singleTypedArray[0] + "']");
+        
+        System.out.println("\n=== Demonstrating array independence ===");
+        
+        MyArrayList<String> independenceList = new MyArrayList<>(3);
+        independenceList.add("Original1");
+        independenceList.add("Original2");
+        independenceList.add("Original3");
+        System.out.println("Original list: " + independenceList.toDetailedString());
+        
+        // Get array copy
+        String[] arrayCopy = independenceList.toArray(new String[3]);
+        System.out.print("Array copy: [");
+        for (int i = 0; i < arrayCopy.length; i++) {
+            System.out.print("'" + arrayCopy[i] + "'");
+            if (i < arrayCopy.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+        
+        // Modify the list
+        independenceList.set(1, "Modified");
+        independenceList.add("NewElement");
+        System.out.println("After modifying list: " + independenceList.toDetailedString());
+        
+        // Array should be unchanged
+        System.out.print("Array copy (unchanged): [");
+        for (int i = 0; i < arrayCopy.length; i++) {
+            System.out.print("'" + arrayCopy[i] + "'");
+            if (i < arrayCopy.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+        
+        // Modify the array
+        arrayCopy[0] = "ArrayModified";
+        System.out.print("After modifying array: [");
+        for (int i = 0; i < arrayCopy.length; i++) {
+            System.out.print("'" + arrayCopy[i] + "'");
+            if (i < arrayCopy.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+        System.out.println("List (unchanged): " + independenceList.toDetailedString());
     }
 }
