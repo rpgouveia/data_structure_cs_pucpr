@@ -110,6 +110,22 @@ public class MyArrayList<T> {
         size++;
     }
 
+    // method to add elements at a specific index
+    public void add(int index, T element) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Index out of bounds: " + index + ". Valid range: 0 to " + size + ".");
+        }
+        if (size >= capacity) {
+            increaseCapacity();
+        }
+        // Shift elements to the right
+        for (int i = size; i > index; i--) {
+            data[i] = data[i - 1];
+        }
+        data[index] = element;
+        size++;
+    }
+
     // method to get the current size of the list
     public int size() {
         return size;
