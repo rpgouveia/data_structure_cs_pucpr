@@ -203,4 +203,12 @@ public class MyArrayList<T> {
     public boolean contains(Object object) {
         return indexOf(object) >= 0;
     }
+
+    // method to clear the list
+    public void clear() {
+        for (int i = 0; i < size; i++) {
+            data[i] = null;
+        }
+        size = 0;
+    }
 }

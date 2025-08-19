@@ -117,21 +117,21 @@ public class Test {
         System.out.println("Initial list: " + removeList.toDetailedString());
         
         // Remove from middle
-        String removed1 = removeList.remove(2);
-        System.out.println("Removed '" + removed1 + "' from index 2: " + removeList.toDetailedString());
+        String removedFromMiddle = removeList.remove(2);
+        System.out.println("Removed '" + removedFromMiddle + "' from index 2: " + removeList.toDetailedString());
         
         // Remove from beginning
-        String removed2 = removeList.remove(0);
-        System.out.println("Removed '" + removed2 + "' from index 0: " + removeList.toDetailedString());
+        String removedFromBeginning = removeList.remove(0);
+        System.out.println("Removed '" + removedFromBeginning + "' from index 0: " + removeList.toDetailedString());
         
         // Remove from end
-        String removed3 = removeList.remove(removeList.size() - 1);
-        System.out.println("Removed '" + removed3 + "' from end: " + removeList.toDetailedString());
+        String removedFromEnd = removeList.remove(removeList.size() - 1);
+        System.out.println("Removed '" + removedFromEnd + "' from end: " + removeList.toDetailedString());
         
         // Remove until empty
-        String removed4 = removeList.remove(0);
-        String removed5 = removeList.remove(0);
-        System.out.println("Removed '" + removed4 + "' and '" + removed5 + "': " + removeList.toDetailedString());
+        String removedSecondToLast = removeList.remove(0);
+        String removedLast = removeList.remove(0);
+        System.out.println("Removed '" + removedSecondToLast + "' and '" + removedLast + "': " + removeList.toDetailedString());
         
         System.out.println("\n=== Remove Error Cases ===");
         
@@ -533,8 +533,8 @@ public class Test {
         System.out.println("List after indexOf (unchanged): " + compareList.toDetailedString());
         
         // remove(Object) removes first occurrence and modifies list
-        boolean removed = compareList.remove("B");
-        System.out.println("remove('B') returns: " + removed);
+        boolean removedObjectB = compareList.remove("B");
+        System.out.println("remove('B') returns: " + removedObjectB);
         System.out.println("List after remove: " + compareList.toDetailedString());
         
         // indexOf again to see the remaining B moved to different index
@@ -680,5 +680,130 @@ public class Test {
         modifyList.add("During");
         System.out.println("After adding 'During' back: " + modifyList.toDetailedString());
         System.out.println("Contains 'During' again: " + modifyList.contains("During"));
+        
+        // Test clear()
+        System.out.println("\n=== Testing clear() ===");
+        
+        MyArrayList<String> clearList = new MyArrayList<>(5);
+        
+        // Add some elements first
+        clearList.add("Element1");
+        clearList.add("Element2");
+        clearList.add("Element3");
+        clearList.add("Element4");
+        System.out.println("List before clear: " + clearList.toDetailedString());
+        System.out.println("Size before clear: " + clearList.size());
+        System.out.println("Capacity before clear: " + clearList.getCapacity());
+        System.out.println("Is empty before clear: " + clearList.isEmpty());
+        
+        // Clear the list
+        clearList.clear();
+        System.out.println("\nAfter calling clear():");
+        System.out.println("List after clear: " + clearList.toDetailedString());
+        System.out.println("Size after clear: " + clearList.size());
+        System.out.println("Capacity after clear: " + clearList.getCapacity());
+        System.out.println("Is empty after clear: " + clearList.isEmpty());
+        
+        System.out.println("\n=== Testing clear on empty list ===");
+        
+        MyArrayList<String> alreadyEmptyList = new MyArrayList<>(3);
+        System.out.println("Empty list before clear: " + alreadyEmptyList.toDetailedString());
+        
+        // Clear an already empty list
+        alreadyEmptyList.clear();
+        System.out.println("Empty list after clear: " + alreadyEmptyList.toDetailedString());
+        System.out.println("Still empty: " + alreadyEmptyList.isEmpty());
+        
+        System.out.println("\n=== Testing operations after clear ===");
+        
+        MyArrayList<Integer> afterClearList = new MyArrayList<>(4);
+        
+        // Add elements, clear, then add again
+        afterClearList.add(100);
+        afterClearList.add(200);
+        afterClearList.add(300);
+        System.out.println("Initial numbers: " + afterClearList.toDetailedString());
+        
+        afterClearList.clear();
+        System.out.println("After clear: " + afterClearList.toDetailedString());
+        
+        // Add new elements after clear
+        afterClearList.add(999);
+        afterClearList.add(888);
+        System.out.println("After adding new elements: " + afterClearList.toDetailedString());
+        
+        // Test that all operations work normally after clear
+        boolean contains999 = afterClearList.contains(999);
+        int indexOf888 = afterClearList.indexOf(888);
+        Integer firstElement = afterClearList.get(0);
+        
+        System.out.println("Contains 999: " + contains999);
+        System.out.println("Index of 888: " + indexOf888);
+        System.out.println("First element: " + firstElement);
+        
+        System.out.println("\n=== Testing clear with null values ===");
+        
+        MyArrayList<String> nullClearList = new MyArrayList<>(4);
+        nullClearList.add("NotNull");
+        nullClearList.add(null);
+        nullClearList.add("AlsoNotNull");
+        nullClearList.add(null);
+        System.out.println("List with nulls before clear: " + nullClearList.toDetailedString());
+        
+        nullClearList.clear();
+        System.out.println("List with nulls after clear: " + nullClearList.toDetailedString());
+        
+        System.out.println("\n=== Testing clear with single element ===");
+        
+        MyArrayList<String> singleClearList = new MyArrayList<>(1);
+        singleClearList.add("OnlyOne");
+        System.out.println("Single element before clear: " + singleClearList.toDetailedString());
+        
+        singleClearList.clear();
+        System.out.println("Single element after clear: " + singleClearList.toDetailedString());
+        
+        System.out.println("\n=== Testing clear with capacity growth ===");
+        
+        MyArrayList<String> growthClearList = new MyArrayList<>(2);
+        
+        // Add elements to trigger capacity growth
+        growthClearList.add("A");
+        growthClearList.add("B");
+        growthClearList.add("C"); // This will trigger growth
+        growthClearList.add("D");
+        System.out.println("List after growth: " + growthClearList.toDetailedString());
+        System.out.println("Capacity after growth: " + growthClearList.getCapacity());
+        
+        // Clear and check if capacity is maintained
+        growthClearList.clear();
+        System.out.println("After clear: " + growthClearList.toDetailedString());
+        System.out.println("Capacity after clear (should be maintained): " + growthClearList.getCapacity());
+        
+        System.out.println("\n=== Demonstrating clear vs remove all ===");
+        
+        MyArrayList<String> compareMethodsList = new MyArrayList<>(4);
+        compareMethodsList.add("X");
+        compareMethodsList.add("Y");
+        compareMethodsList.add("Z");
+        compareMethodsList.add("W");
+        System.out.println("Initial list: " + compareMethodsList.toDetailedString());
+        
+        // Show what removing all elements one by one would look like
+        MyArrayList<String> removeAllList = new MyArrayList<>(4);
+        removeAllList.add("X");
+        removeAllList.add("Y");
+        removeAllList.add("Z");
+        removeAllList.add("W");
+        
+        System.out.println("Removing elements one by one:");
+        while (!removeAllList.isEmpty()) {
+            String removedOneByOne = removeAllList.remove(0);
+            System.out.println("Removed: '" + removedOneByOne + "', List: " + removeAllList.toDetailedString());
+        }
+        
+        // Compare with clear (much more efficient)
+        System.out.println("Using clear() instead:");
+        compareMethodsList.clear();
+        System.out.println("After clear(): " + compareMethodsList.toDetailedString());
     }
 }
