@@ -314,5 +314,121 @@ public class Test {
         }
         
         System.out.println("\nFinal set list state: " + setList.toDetailedString());
+        
+        // Test get(index)
+        System.out.println("\n=== Testing get(index) ===");
+        
+        MyArrayList<String> getList = new MyArrayList<>(5);
+        
+        // Add some elements first
+        getList.add("First");
+        getList.add("Second");
+        getList.add("Third");
+        getList.add("Fourth");
+        System.out.println("Initial list: " + getList.toDetailedString());
+        
+        // Get elements from different positions
+        String first = getList.get(0);
+        String second = getList.get(1);
+        String third = getList.get(2);
+        String last = getList.get(getList.size() - 1);
+        
+        System.out.println("Get index 0: '" + first + "'");
+        System.out.println("Get index 1: '" + second + "'");
+        System.out.println("Get index 2: '" + third + "'");
+        System.out.println("Get last index: '" + last + "'");
+        
+        // Verify list is unchanged after get operations
+        System.out.println("List after gets (unchanged): " + getList.toDetailedString());
+        
+        System.out.println("\n=== Testing get with different types ===");
+        
+        MyArrayList<Integer> numberGetList = new MyArrayList<>(4);
+        numberGetList.add(100);
+        numberGetList.add(200);
+        numberGetList.add(300);
+        System.out.println("Number list: " + numberGetList.toDetailedString());
+        
+        Integer num1 = numberGetList.get(0);
+        Integer num2 = numberGetList.get(1);
+        Integer num3 = numberGetList.get(2);
+        
+        System.out.println("Numbers: " + num1 + ", " + num2 + ", " + num3);
+        
+        System.out.println("\n=== Testing get with null values ===");
+        
+        MyArrayList<String> nullGetList = new MyArrayList<>(3);
+        nullGetList.add("NotNull");
+        nullGetList.add(null);
+        nullGetList.add("AlsoNotNull");
+        System.out.println("List with null: " + nullGetList.toDetailedString());
+        
+        String notNull = nullGetList.get(0);
+        String nullValue = nullGetList.get(1);
+        String alsoNotNull = nullGetList.get(2);
+        
+        System.out.println("Get index 0: '" + notNull + "'");
+        System.out.println("Get index 1 (null): " + nullValue);
+        System.out.println("Get index 2: '" + alsoNotNull + "'");
+        
+        System.out.println("\n=== Testing get with single element ===");
+        
+        MyArrayList<String> singleList = new MyArrayList<>(1);
+        singleList.add("OnlyOne");
+        System.out.println("Single element list: " + singleList.toDetailedString());
+        
+        String onlyElement = singleList.get(0);
+        System.out.println("Get only element: '" + onlyElement + "'");
+        
+        System.out.println("\n=== Get Error Cases ===");
+        
+        // Test invalid indices
+        try {
+            getList.get(-1);
+        } catch (IndexOutOfBoundsException error) {
+            System.out.println("Caught expected error for index -1: " + error.getMessage());
+        }
+        
+        try {
+            getList.get(getList.size());
+        } catch (IndexOutOfBoundsException error) {
+            System.out.println("Caught expected error for index " + getList.size() + ": " + error.getMessage());
+        }
+        
+        try {
+            getList.get(100);
+        } catch (IndexOutOfBoundsException error) {
+            System.out.println("Caught expected error for index 100: " + error.getMessage());
+        }
+        
+        // Test get on empty list
+        MyArrayList<String> emptyGetList = new MyArrayList<>();
+        try {
+            emptyGetList.get(0);
+        } catch (IndexOutOfBoundsException error) {
+            System.out.println("Caught expected error getting from empty list: " + error.getMessage());
+        }
+        
+        System.out.println("\n=== Demonstrating get vs set ===");
+        
+        MyArrayList<String> demoList = new MyArrayList<>(3);
+        demoList.add("A");
+        demoList.add("B");
+        demoList.add("C");
+        System.out.println("Demo list: " + demoList.toDetailedString());
+        
+        // Get doesn't change the list
+        String gotValue = demoList.get(1);
+        System.out.println("Got value at index 1: '" + gotValue + "'");
+        System.out.println("List after get: " + demoList.toDetailedString());
+        
+        // Set changes the list
+        String oldValue = demoList.set(1, "CHANGED");
+        System.out.println("Set index 1 to 'CHANGED', old value: '" + oldValue + "'");
+        System.out.println("List after set: " + demoList.toDetailedString());
+        
+        // Get the changed value
+        String newValue = demoList.get(1);
+        System.out.println("Get new value at index 1: '" + newValue + "'");
     }
 }

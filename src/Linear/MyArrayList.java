@@ -38,6 +38,20 @@ public class MyArrayList<T> {
         return size >= capacity;
     }
 
+    // method for flexible index validation
+    private void checkIndex(int index, boolean allowSizeIndex) {
+        int maxIndex = allowSizeIndex ? size : size - 1;
+        if (index < 0 || index > maxIndex) {
+            String range = allowSizeIndex ? "0 to " + size : "0 to " + (size - 1);
+            throw new IndexOutOfBoundsException("Index out of bounds: " + index + ". Valid range: " + range + ".");
+        }
+    }
+
+    // method for standard index checking (most common case: 0 to size-1)
+    private void checkIndex(int index) {
+        checkIndex(index, false);
+    }
+
     @SuppressWarnings("unchecked")
     private void increaseCapacity() {
         int newCapacity;
@@ -99,7 +113,6 @@ public class MyArrayList<T> {
         );
     }
 
-
     /* main methods */
     // method to add elements at the end of the list
     public void add(T element) {
@@ -112,31 +125,34 @@ public class MyArrayList<T> {
 
     // method to add elements at a specific index
     public void add(int index, T element) {
-        if (index < 0 || index > size) {
-            throw new IndexOutOfBoundsException("Index out of bounds: " + index + ". Valid range: 0 to " + size + ".");
-        }
+        // index == size for insertion at end
+        checkIndex(index, true);
+        
         if (size >= capacity) {
             increaseCapacity();
         }
+        
         // Shift elements to the right
         for (int i = size; i > index; i--) {
             data[i] = data[i - 1];
         }
+
         data[index] = element;
         size++;
     }
 
     // method to remove elements at a specific index
     public T remove(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Index out of bounds: " + index + ". Valid range: 0 to " + (size - 1) + ".");
-        }
+        checkIndex(index); // Standard index check (0 to size-1)
+        
         // Store the element to be removed
         T removedElement = data[index];
+        
         // Shift elements to the left
         for (int i = index; i < size - 1; i++) {
             data[i] = data[i + 1];
         }
+
         data[size - 1] = null; // Clear the last element
         size--;
         return removedElement;
@@ -161,12 +177,15 @@ public class MyArrayList<T> {
 
     // method to set an element at a specific index
     public T set(int index, T element) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Index out of bounds: " + index + ". Valid range: 0 to " + (size - 1) + ".");
-        }
+        checkIndex(index); // Standard index check (0 to size-1)
         T oldValue = data[index];
         data[index] = element;
         return oldValue;
     }
-}
 
+    // method to get an element at a specific index
+    public T get(int index) {
+        checkIndex(index); // Standard index check (0 to size-1)
+        return data[index];
+    }
+}
