@@ -6,7 +6,7 @@ import java.util.Arrays;
 // Create generic (https://www.w3schools.com/java/java_generics.asp)
 // toArray() method (https://www.w3schools.com/java/ref_arraylist_toarray.asp)
 
-// Implementation
+// Custom implementation of ArrayList
 public class MyArrayList<T> {
     /* attributes */
     private T[] data;       // array to store elements
