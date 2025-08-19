@@ -187,4 +187,15 @@ public class MyArrayList<T> {
         checkIndex(index);
         return data[index];
     }
+
+    // method to find the index of an element
+    public int indexOf(Object object) {
+        for (int i = 0; i < size; i++) {
+            // Check if the current element matches the object
+            if (object == null ? data[i] == null : object.equals(data[i])) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }

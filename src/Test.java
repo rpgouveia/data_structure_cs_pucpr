@@ -430,5 +430,115 @@ public class Test {
         // Get the changed value
         String newValue = demoList.get(1);
         System.out.println("Get new value at index 1: '" + newValue + "'");
+        
+        // Test indexOf(Object)
+        System.out.println("\n=== Testing indexOf(Object) ===");
+        
+        MyArrayList<String> indexOfList = new MyArrayList<>(8);
+        
+        // Add some elements with duplicates
+        indexOfList.add("Apple");
+        indexOfList.add("Banana");
+        indexOfList.add("Cherry");
+        indexOfList.add("Banana");
+        indexOfList.add("Date");
+        indexOfList.add("Apple");
+        System.out.println("List with duplicates: " + indexOfList.toDetailedString());
+        
+        // Find indices of existing elements
+        int appleIndex = indexOfList.indexOf("Apple");
+        int bananaIndex = indexOfList.indexOf("Banana");
+        int cherryIndex = indexOfList.indexOf("Cherry");
+        int dateIndex = indexOfList.indexOf("Date");
+        
+        System.out.println("Index of 'Apple' (first occurrence): " + appleIndex);
+        System.out.println("Index of 'Banana' (first occurrence): " + bananaIndex);
+        System.out.println("Index of 'Cherry': " + cherryIndex);
+        System.out.println("Index of 'Date': " + dateIndex);
+        
+        // Try to find non-existent element
+        int grapeIndex = indexOfList.indexOf("Grape");
+        System.out.println("Index of 'Grape' (doesn't exist): " + grapeIndex);
+        
+        System.out.println("\n=== Testing indexOf with null values ===");
+        
+        MyArrayList<String> nullIndexList = new MyArrayList<>(5);
+        nullIndexList.add("First");
+        nullIndexList.add(null);
+        nullIndexList.add("Third");
+        nullIndexList.add(null);
+        nullIndexList.add("Last");
+        System.out.println("List with nulls: " + nullIndexList.toDetailedString());
+        
+        // Find indices including null
+        int firstIndex = nullIndexList.indexOf("First");
+        int nullIndex = nullIndexList.indexOf(null);
+        int thirdIndex = nullIndexList.indexOf("Third");
+        int lastIndex = nullIndexList.indexOf("Last");
+        
+        System.out.println("Index of 'First': " + firstIndex);
+        System.out.println("Index of null (first occurrence): " + nullIndex);
+        System.out.println("Index of 'Third': " + thirdIndex);
+        System.out.println("Index of 'Last': " + lastIndex);
+        
+        System.out.println("\n=== Testing indexOf with different types ===");
+        
+        MyArrayList<Integer> numberIndexList = new MyArrayList<>(4);
+        numberIndexList.add(100);
+        numberIndexList.add(200);
+        numberIndexList.add(300);
+        numberIndexList.add(200);
+        System.out.println("Number list: " + numberIndexList.toDetailedString());
+        
+        int index100 = numberIndexList.indexOf(100);
+        int index200 = numberIndexList.indexOf(200); // First occurrence
+        int index300 = numberIndexList.indexOf(300);
+        int index400 = numberIndexList.indexOf(400); // Doesn't exist
+        
+        System.out.println("Index of 100: " + index100);
+        System.out.println("Index of 200 (first occurrence): " + index200);
+        System.out.println("Index of 300: " + index300);
+        System.out.println("Index of 400 (doesn't exist): " + index400);
+        
+        System.out.println("\n=== Testing indexOf on empty list ===");
+        
+        MyArrayList<String> emptyIndexList = new MyArrayList<>();
+        int indexInEmpty = emptyIndexList.indexOf("anything");
+        System.out.println("Index of 'anything' in empty list: " + indexInEmpty);
+        
+        System.out.println("\n=== Testing indexOf with single element ===");
+        
+        MyArrayList<String> singleIndexList = new MyArrayList<>(1);
+        singleIndexList.add("OnlyOne");
+        System.out.println("Single element list: " + singleIndexList.toDetailedString());
+        
+        int onlyOneIndex = singleIndexList.indexOf("OnlyOne");
+        int notFoundIndex = singleIndexList.indexOf("NotThere");
+        
+        System.out.println("Index of 'OnlyOne': " + onlyOneIndex);
+        System.out.println("Index of 'NotThere': " + notFoundIndex);
+        
+        System.out.println("\n=== Demonstrating indexOf vs remove(Object) ===");
+        
+        MyArrayList<String> compareList = new MyArrayList<>(4);
+        compareList.add("A");
+        compareList.add("B");
+        compareList.add("C");
+        compareList.add("B");
+        System.out.println("Demo list: " + compareList.toDetailedString());
+        
+        // indexOf finds first occurrence but doesn't modify list
+        int foundIndex = compareList.indexOf("B");
+        System.out.println("indexOf('B') returns: " + foundIndex);
+        System.out.println("List after indexOf (unchanged): " + compareList.toDetailedString());
+        
+        // remove(Object) removes first occurrence and modifies list
+        boolean removed = compareList.remove("B");
+        System.out.println("remove('B') returns: " + removed);
+        System.out.println("List after remove: " + compareList.toDetailedString());
+        
+        // indexOf again to see the remaining B moved to different index
+        int newIndex = compareList.indexOf("B");
+        System.out.println("indexOf('B') after removal: " + newIndex);
     }
 }
