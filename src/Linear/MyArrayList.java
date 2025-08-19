@@ -125,9 +125,8 @@ public class MyArrayList<T> {
 
     // method to add elements at a specific index
     public void add(int index, T element) {
-        // index == size for insertion at end
-        checkIndex(index, true);
-        
+        checkIndex(index, true); // Allow index == size for insertion at end
+
         if (size >= capacity) {
             increaseCapacity();
         }
@@ -143,7 +142,7 @@ public class MyArrayList<T> {
 
     // method to remove elements at a specific index
     public T remove(int index) {
-        checkIndex(index); // Standard index check (0 to size-1)
+        checkIndex(index);
         
         // Store the element to be removed
         T removedElement = data[index];
@@ -177,7 +176,7 @@ public class MyArrayList<T> {
 
     // method to set an element at a specific index
     public T set(int index, T element) {
-        checkIndex(index); // Standard index check (0 to size-1)
+        checkIndex(index);
         T oldValue = data[index];
         data[index] = element;
         return oldValue;
@@ -185,7 +184,7 @@ public class MyArrayList<T> {
 
     // method to get an element at a specific index
     public T get(int index) {
-        checkIndex(index); // Standard index check (0 to size-1)
+        checkIndex(index);
         return data[index];
     }
 }
