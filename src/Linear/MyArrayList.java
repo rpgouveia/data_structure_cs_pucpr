@@ -142,6 +142,18 @@ public class MyArrayList<T> {
         return removedElement;
     }
 
+    // method to remove the first occurrence of a specific object
+    public boolean remove(Object object) {
+        for (int i = 0; i < size; i++) {
+            // Check if the current element matches the object to remove
+            if (object == null ? data[i] == null : object.equals(data[i])) {
+                remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
     // method to get the current size of the list
     public int size() {
         return size;

@@ -161,5 +161,70 @@ public class Test {
         // Remove the last element
         String lastRemoved = removeList.remove(0);
         System.out.println("Removed last element '" + lastRemoved + "': " + removeList.toDetailedString());
+        
+        // Test remove(Object)
+        System.out.println("\n=== Testing remove(Object) ===");
+        
+        MyArrayList<String> objectRemoveList = new MyArrayList<>(6);
+        
+        // Add some elements with duplicates
+        objectRemoveList.add("Java");
+        objectRemoveList.add("Python");
+        objectRemoveList.add("Java");
+        objectRemoveList.add("C++");
+        objectRemoveList.add("Python");
+        objectRemoveList.add("Go");
+        System.out.println("Initial list with duplicates: " + objectRemoveList.toDetailedString());
+        
+        // Remove first occurrence of "Java"
+        boolean removedJava1 = objectRemoveList.remove("Java");
+        System.out.println("Remove 'Java' (first occurrence) - Success: " + removedJava1);
+        System.out.println("Result: " + objectRemoveList.toDetailedString());
+        
+        // Remove "C++"
+        boolean removedCpp = objectRemoveList.remove("C++");
+        System.out.println("Remove 'C++' - Success: " + removedCpp);
+        System.out.println("Result: " + objectRemoveList.toDetailedString());
+        
+        // Try to remove non-existent element
+        boolean removedRust = objectRemoveList.remove("Rust");
+        System.out.println("Remove 'Rust' (doesn't exist) - Success: " + removedRust);
+        System.out.println("Result: " + objectRemoveList.toDetailedString());
+        
+        // Remove remaining "Java" (second occurrence)
+        boolean removedJava2 = objectRemoveList.remove("Java");
+        System.out.println("Remove 'Java' (second occurrence) - Success: " + removedJava2);
+        System.out.println("Result: " + objectRemoveList.toDetailedString());
+        
+        System.out.println("\n=== Testing remove(Object) with null ===");
+        
+        MyArrayList<String> nullTestList = new MyArrayList<>(4);
+        nullTestList.add("A");
+        nullTestList.add(null);
+        nullTestList.add("B");
+        nullTestList.add(null);
+        System.out.println("List with nulls: " + nullTestList.toDetailedString());
+        
+        // Remove first null
+        boolean removedFirstNull = nullTestList.remove(null);
+        System.out.println("Remove null (first occurrence) - Success: " + removedFirstNull);
+        System.out.println("Result: " + nullTestList.toDetailedString());
+        
+        // Remove second null
+        boolean removedSecondNull = nullTestList.remove(null);
+        System.out.println("Remove null (second occurrence) - Success: " + removedSecondNull);
+        System.out.println("Result: " + nullTestList.toDetailedString());
+        
+        // Try to remove null when none exists
+        boolean removedNonExistentNull = nullTestList.remove(null);
+        System.out.println("Remove null (doesn't exist) - Success: " + removedNonExistentNull);
+        System.out.println("Result: " + nullTestList.toDetailedString());
+        
+        System.out.println("\n=== Testing remove(Object) on empty list ===");
+        
+        MyArrayList<String> emptyRemoveList = new MyArrayList<>();
+        boolean removedFromEmpty = emptyRemoveList.remove("anything");
+        System.out.println("Remove from empty list - Success: " + removedFromEmpty);
+        System.out.println("Empty list: " + emptyRemoveList.toDetailedString());
     }
 }
