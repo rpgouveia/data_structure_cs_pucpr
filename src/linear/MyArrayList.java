@@ -6,7 +6,6 @@ import java.util.Arrays;
 // Create generic (https://www.w3schools.com/java/java_generics.asp)
 // toArray() method (https://www.w3schools.com/java/ref_arraylist_toarray.asp)
 
-// Custom implementation of ArrayList
 public class MyArrayList<T> {
     /* attributes */
     private T[] data;       // array to store elements
@@ -59,7 +58,7 @@ public class MyArrayList<T> {
     private void increaseCapacity() {
         int newCapacity;
         if (capacity == 0) {
-            newCapacity = 1; // Start with a capacity of 1 if current is 0
+            newCapacity = 1;
         } else {
             newCapacity = capacity * 2; // Double the capacity
         }
