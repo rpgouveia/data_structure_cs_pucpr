@@ -39,9 +39,28 @@ public class MyStack<T> {
         return sb.toString();
     }
 
+    public void printElements() {
+        System.out.print("Elements in stack (top to bottom): ");
+        if (isEmpty()) {
+            System.out.println("Stack is empty");
+            return;
+        }
+
+        Node<T> current = top;
+        while (current != null) {
+            System.out.print(current.getElement());
+            if (current.getNext() != null) {
+                System.out.print(" -> ");
+            }
+            current = current.getNext();
+        }
+        System.out.println();
+    }
+
     /* main methods */
     public void push (T element) {
         Node<T> newNode = new Node<>(element);
+        newNode.setNext(top);
         top = newNode;
         size += 1;
     }

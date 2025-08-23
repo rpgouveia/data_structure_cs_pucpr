@@ -2,8 +2,8 @@ package linear;
 
 public class Node<E> {
     /* attributes */
-    private E element;
-    private Node<E> next;
+    private E element;      // element stored in the node
+    private Node<E> next;   // reference to the next node
 
     /* constructor */
     public Node(E element) {
