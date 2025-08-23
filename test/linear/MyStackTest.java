@@ -7,7 +7,11 @@ public class MyStackTest {
 
         System.out.println("list1: " + list1);
 
+        list1.push("Angelo");
+        list1.push("Fernando");
+        list1.push("Jafte");
         list1.push("Renato");
+        list1.push("Spencer");
         System.out.println("list1: " + list1);
     }
 }
